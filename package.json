@@ -90,7 +90,10 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/$1"
+    }
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
