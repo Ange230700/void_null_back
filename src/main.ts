@@ -1,9 +1,9 @@
 // src\main.ts
 
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from '@/app.module';
+import { AppModule } from '@/src/app.module';
 import { INestApplication } from '@nestjs/common';
-import { IEntryNestModule } from '@/types/nest';
+import { IEntryNestModule } from '@/src/types/nest';
 
 async function bootstrap() {
   const app: INestApplication = await NestFactory.create(
