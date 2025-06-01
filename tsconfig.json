@@ -22,5 +22,5 @@
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*", "commitlint.config.js", "test/**/*"]
+  "include": ["src/**/*", "commitlint.config.js", "prisma/**/*.ts", "test/**/*"]
 }

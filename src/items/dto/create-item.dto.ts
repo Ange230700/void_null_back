@@ -3,6 +3,6 @@
 export class CreateItemDto {
   name: string;
   description?: string;
-  price: number;
+  price: string;
   inStock?: boolean;
 }
