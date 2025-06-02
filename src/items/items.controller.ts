@@ -10,9 +10,9 @@ import {
   Delete,
   ParseIntPipe,
 } from '@nestjs/common';
-import { ItemsService } from './items.service';
-import { CreateItemDto } from './dto/create-item.dto';
-import { UpdateItemDto } from './dto/update-item.dto';
+import { ItemsService } from '@/src/items/items.service';
+import { CreateItemDto } from '@/src/items/dto/create-item.dto';
+import { UpdateItemDto } from '@/src/items/dto/update-item.dto';
 
 @Controller('items')
 export class ItemsController {
