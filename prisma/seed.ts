@@ -1,11 +1,42 @@
 // prisma/seed.ts
 
-import { PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+import prisma from '@/src/prismaClient';
 import { faker } from '@faker-js/faker';
 
-const prisma = new PrismaClient();
+async function safeDelete(fn: () => Promise<unknown>, name: string) {
+  const MAX_TRIES = 10;
+  let tries = 0;
+  while (true) {
+    try {
+      await fn();
+      console.log(`✅ Deleted ${name}`);
+      return;
+    } catch (e: unknown) {
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === 'P2034' &&
+        tries < MAX_TRIES
+      ) {
+        tries++;
+        console.log(`⚠️ Retrying to delete ${name}`);
+        continue;
+      }
+
+      throw e;
+    }
+  }
+}
+
+async function cleanup() {
+  await safeDelete(() => prisma.item.deleteMany({}), 'items');
+}
 
 async function main() {
+  console.log('👋 Cleaning up...');
+  await cleanup();
+
+  console.log('🌱 Start seeding...');
   // Number of fake items you want to create
   const COUNT = 20;
 
