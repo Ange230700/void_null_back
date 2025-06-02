@@ -9,6 +9,11 @@ async function bootstrap() {
   const app: INestApplication = await NestFactory.create(
     AppModule as IEntryNestModule,
   );
+  app.enableCors({
+    origin: process.env.FRONT_API_BASE_URL,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap().catch((err) => {
