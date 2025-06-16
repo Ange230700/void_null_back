@@ -1,98 +1,258 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<!-- README.md -->
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# VoidNull Backend
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<!-- ![VoidNull Logo](public/logo.png) (Replace with your project logo if available) -->
 
-## Description
+A RESTful backend API for managing inventory items, built with **NestJS**, **Prisma**, and **MySQL**.
+Main features:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- CRUD operations for items (name, description, price, in stock, timestamps)
+- Type-safe schema and data access via Prisma
+- Modern development workflow with robust testing, formatting, and CI tools
 
-## Project setup
+---
+
+## Table of Contents
+
+<!-- * [Demo](#demo) -->
+
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Running the Project](#running-the-project)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Environment Variables](#environment-variables)
+  <!-- * [Contributing](#contributing) -->
+  <!-- * [License](#license) -->
+  <!-- * [Acknowledgements](#acknowledgements) -->
+- [Contact](#contact)
+
+<!-- ---
+
+## Demo
+
+**Live Backend:** [https://void-null-back.onrender.com](https://void-null-back.onrender.com)
+**Frontend:** [VoidNull Frontend](https://void-null-front.onrender.com)
+
+> Example endpoint:
+> [GET /items](https://void-null-back.onrender.com/items) – list all items
+
+![Screenshot](public/screenshot.png) Replace if you have an actual screenshot -->
+
+---
+
+## Tech Stack
+
+**Backend:**
+
+- NestJS (TypeScript, Express)
+- Prisma ORM
+- MySQL
+
+**Dev Tools:**
+
+- Jest (unit & e2e testing)
+- ESLint, Prettier, Husky, lint-staged, Commitlint
+- Docker (optional, for local database or deployment)
+- GitHub Actions (optional, for CI/CD)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (>=20.x)
+- npm (>=9.x)
+- MySQL database (local, Docker, or managed)
+<!-- * (Optional) Docker -->
+
+### Installation
 
 ```bash
-$ npm install
+git clone https://github.com/Ange230700/void_null_back.git
+cd void_null_back
+npm install
 ```
 
-## Compile and run the project
+---
+
+## Running the Project
+
+### 1. Setup Environment Variables
+
+Copy `.env.sample` to `.env` and fill in your values:
+
+```env
+DATABASE_URL="mysql://user:password@host:port/database_name"
+FRONT_API_BASE_URL=http://localhost:4200
+PORT=3000
+```
+
+### 2. Run Database Migrations & Seed (first time)
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run prisma:migrate:dev
+npm run prisma:db:seed
 ```
 
-## Run tests
+### 3. Start the Backend
+
+**Development mode (auto-reload):**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
+
+**Production mode:**
+
+```bash
+npm run build
+npm run start:prod
+```
+
+App runs by default at [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Project Structure
+
+```
+├── src/
+│   ├── app.module.ts        # Main NestJS module
+│   ├── app.controller.ts    # Root controller ("/" endpoint)
+│   ├── items/               # Item module (CRUD: controller, service, DTOs)
+│   └── prismaClient.ts      # Prisma client instance
+├── prisma/
+│   ├── schema.prisma        # Prisma database schema (MySQL)
+│   └── seed.ts              # Database seeder (with Faker)
+├── test/                    # e2e and unit test specs
+├── .env.sample              # Example environment config
+├── package.json
+├── tsconfig.json
+└── ...
+```
+
+---
+
+## API Documentation
+
+All endpoints accept/return JSON.
+
+| Method | Endpoint    | Description                  |
+| ------ | ----------- | ---------------------------- |
+| GET    | /           | Healthcheck (`Hello World!`) |
+| GET    | /items      | Get all items                |
+| GET    | /items/\:id | Get one item by id           |
+| POST   | /items      | Create new item              |
+| PATCH  | /items/\:id | Update item                  |
+| DELETE | /items/\:id | Delete item                  |
+
+Example `Item` object:
+
+```json
+{
+  "id": 1,
+  "name": "Book",
+  "description": "A cool book",
+  "price": "19.99 €",
+  "inStock": true,
+  "createdAt": "2024-06-16T12:34:56.000Z",
+  "updatedAt": "2024-06-16T12:34:56.000Z"
+}
+```
+
+<!-- > **OpenAPI/Swagger docs:** *Not included out of the box, but you can easily add with [@nestjs/swagger](https://docs.nestjs.com/openapi/introduction).* -->
+<!-- > See [src/items/items.controller.ts](src/items/items.controller.ts) for endpoints. -->
+
+---
+
+## Testing
+
+Run all tests:
+
+```bash
+npm test
+```
+
+- Unit tests: Jest (`*.spec.ts`)
+- End-to-end tests: Jest + Supertest (`test/*.e2e-spec.ts`)
+
+---
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+1. Set production `.env` (`DATABASE_URL`, `PORT`, etc).
+2. Build the project:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+   ```bash
+   npm run build
+   ```
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+3. Start the server:
+
+   ```bash
+   npm run start:prod
+   ```
+
+4. For Docker, create a `Dockerfile` or use your favorite platform (e.g. Render, Heroku, AWS, etc).
+
+---
+
+## Environment Variables
+
+Create a `.env` file at the project root with:
+
+```env
+DATABASE_URL="mysql://user:password@host:port/database_name"
+FRONT_API_BASE_URL=<frontend origin for CORS>
+PORT=3000
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+- `DATABASE_URL`: MySQL connection string (required)
+- `FRONT_API_BASE_URL`: Frontend base URL for CORS (e.g. `http://localhost:4200`)
+- `PORT`: Server port (default: 3000)
 
-## Resources
+<!-- ---
 
-Check out a few resources that may come in handy when working with NestJS:
+## Contributing
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Contributions are welcome! Please follow these steps:
 
-## Support
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -m 'Add feature'`)
+4. Push your branch (`git push origin feature/new-feature`)
+5. Create a Pull Request
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Pre-commit hooks, linting, and formatting are enforced for code quality. -->
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<!-- ---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+MIT License -->
+
+<!-- ---
+
+## Acknowledgements
+
+Special thanks to these libraries & frameworks:
+
+* [NestJS](https://nestjs.com/)
+* [Prisma](https://www.prisma.io/)
+* [MySQL](https://www.mysql.com/)
+* [Jest](https://jestjs.io/)
+* [Faker](https://fakerjs.dev/) -->
+
+---
+
+## Contact
+
+Ange KOUAKOU – [kouakouangeericstephane@gmail.com](mailto:kouakouangeericstephane@gmail.com)
+
+[Frontend Repo](https://github.com/Ange230700/void_null_front)
+[Backend Repo](https://github.com/Ange230700/void_null_back)

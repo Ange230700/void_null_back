@@ -19,5 +19,12 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#1857a4",
-  "cSpell.words": ["datasource", "mysql", "nestjs", "prisma"]
+  "cSpell.words": [
+    "datasource",
+    "Healthcheck",
+    "KOUAKOU",
+    "mysql",
+    "nestjs",
+    "prisma"
+  ]
 }
