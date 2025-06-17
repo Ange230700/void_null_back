@@ -54,6 +54,8 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
     "@types/supertest": "^6.0.2",
+    "commit-prompt": "^2.2.3",
+    "commitizen": "^4.3.1",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.2.2",
@@ -61,6 +63,7 @@
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "lint-staged": "^16.1.0",
+    "mol-conventional-changelog": "^2.0.0",
     "prettier": "^3.5.3",
     "prisma": "^6.8.2",
     "source-map-support": "^0.5.21",
@@ -101,6 +104,11 @@
   "validate-branch-name": {
     "pattern": "^(master|main|develop){1}$|^(feature|fix|hotfix|release)/.+$",
     "errorMsg": "Branch name must be master, main, develop, feature, fix, hotfix or release"
+  },
+  "config": {
+    "commitizen": {
+      "path": "commit-prompt"
+    }
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
