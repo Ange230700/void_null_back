@@ -28,7 +28,9 @@
     "prisma:db:push": "prisma db push",
     "prisma:db:pull": "prisma db pull",
     "prisma:format": "prisma format",
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
+    "seed": "node --loader ts-node/esm prisma/seed.ts",
+    "git:commit": "git cz",
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-angular": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
@@ -56,6 +59,7 @@
     "@types/supertest": "^6.0.2",
     "commit-prompt": "^2.2.3",
     "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.2.2",
@@ -107,7 +111,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "commit-prompt"
+      "path": "./node_modules/cz-conventional-changelog"
     }
   },
   "prisma": {

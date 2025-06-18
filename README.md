@@ -256,3 +256,5 @@ Ange KOUAKOU – [kouakouangeericstephane@gmail.com](mailto:kouakouangeericsteph
 
 [Frontend Repo](https://github.com/Ange230700/void_null_front)
 [Backend Repo](https://github.com/Ange230700/void_null_back)
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
